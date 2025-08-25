@@ -1,0 +1,1 @@
+class WithdrawalTransaction < Transaction; end

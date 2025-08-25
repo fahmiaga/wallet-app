@@ -1,0 +1,1 @@
+class TransferTransaction < Transaction; end
