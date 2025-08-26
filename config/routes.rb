@@ -11,4 +11,21 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  scope :api do
+    post "sign_in", to: "sessions#create"
+    delete "sign_out", to: "sessions#destroy"
+
+    resources :wallets, only: [ :show ] do
+      member do
+        get :balance
+        post :deposit
+        post :withdraw
+        post :transfer
+      end
+    end
+
+    get  "price",      to: "stocks#price"
+    get  "prices",     to: "stocks#prices"
+    get  "price_all",  to: "stocks#price_all"
+  end
 end
