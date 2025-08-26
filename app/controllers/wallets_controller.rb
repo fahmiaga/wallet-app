@@ -1,4 +1,5 @@
 class WalletsController < ApplicationController
+  include AuthorizeResource
   before_action :require_auth!
   before_action :set_wallet
 
@@ -85,6 +86,7 @@ class WalletsController < ApplicationController
 
   def set_wallet
     @wallet = Wallet.find(params[:id])
+    authorized(owner: @wallet.owner)
   end
 
   def mover
