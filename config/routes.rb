@@ -27,5 +27,6 @@ Rails.application.routes.draw do
     get  "price",      to: "stocks#price"
     get  "prices",     to: "stocks#prices"
     get  "price_all",  to: "stocks#price_all"
+    get  "price_one",  to: "stocks#price_one"
   end
 end
