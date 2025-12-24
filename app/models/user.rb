@@ -19,4 +19,9 @@ class User < ApplicationRecord
   def self.hash_password(raw, salt)
     OpenSSL::Digest::SHA256.hexdigest("#{salt}--#{raw}")
   end
+
+  def set_k_to_nil
+    role = nil
+    role
+  end
 end
