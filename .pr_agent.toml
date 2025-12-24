@@ -20,3 +20,8 @@ performance = true
 
 [rules.javascript]
 eslint = true
+
+[pr_reviewer]
+extra_instructions = """
+Just give a review for controllers only
+"""
