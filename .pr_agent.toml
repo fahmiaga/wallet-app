@@ -1,0 +1,22 @@
+[config]
+disable_auto_feedback = true     
+
+[pull_request]
+review = true                   
+review_comment_lgtm = true
+inline_code_comments = true      
+summarize = true                 
+on_push_update = false           
+
+[pull_request_commands]
+enabled = true
+review = true
+
+[rules.ruby]
+security = true
+bugs = true
+style = false                    
+performance = true
+
+[rules.javascript]
+eslint = true
