@@ -1,5 +1,5 @@
 [config]
-disable_auto_feedback = true     
+disable_auto_feedback = false     
 
 [pull_request]
 review = true                   
@@ -23,5 +23,10 @@ eslint = true
 
 [pr_reviewer]
 extra_instructions = """
-Just give a review for controllers only
+Before reviewing the PR:
+1. Read and follow the repository documentation:
+   - docs/best_practices.md
+2. Treat these documents as the source of truth.
+3. When reviewing, reference violations of these best practices explicitly.
+4. Leave inline comments when best practices are violated.
 """
