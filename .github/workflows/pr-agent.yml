@@ -2,7 +2,7 @@ name: PR Agent Open Source
 
 on:
   pull_request:
-    types: [opened, reopened, ready_for_review]
+    types: [opened, reopened, ready_for_review, synchronize]
 
 jobs:
   pr_agent:
@@ -20,7 +20,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-          config.model: "gemini/gemini-2.5-flash"
+          config.model: "gemini/gemini-2.5-pro"
           config.fallback_models: '["gemini/gemini-2.5-flash"]'
 
           GOOGLE_API_KEY: ${{ secrets.GEMINI_API_KEY }}
