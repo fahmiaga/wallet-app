@@ -2,6 +2,8 @@ name: PR Agent Open Source
 
 on:
   pull_request:
+    branches:
+      - main
     types: [opened, reopened, ready_for_review, synchronize]
 
 jobs:
