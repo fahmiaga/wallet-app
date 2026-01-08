@@ -17,16 +17,15 @@ jobs:
       contents: write
 
     steps:
-      - name: Run PR Agent
-        uses: qodo-ai/pr-agent@main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Run PR Agent
+      uses: qodo-ai/pr-agent@main
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GOOGLE_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      with:
+        config.model: "gemini/gemini-2.5-pro"
+        config.fallback_models: '["gemini/gemini-2.5-flash"]'
+        github_action_config.auto_review: "true"
+        github_action_config.auto_describe: "false"
+        github_action_config.auto_improve: "true"
 
-          config.model: "gemini/gemini-2.5-pro"
-          config.fallback_models: '["gemini/gemini-2.5-flash"]'
-
-          GOOGLE_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-
-          github_action_config.auto_review: "true"
-          github_action_config.auto_describe: "false"
-          github_action_config.auto_improve: "false"
