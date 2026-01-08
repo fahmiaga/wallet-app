@@ -5,7 +5,6 @@
 - Always use `update!`
 - Avoid callbacks for business logic
 - Use service objects for complex flows
-- answer in indonesia.
 
 ## Security
 - Never trust params directly
