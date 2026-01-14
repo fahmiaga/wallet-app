@@ -24,14 +24,7 @@ eslint = true
 
 [custom_labels."needs-staging-test"]
 description = """
-pr_agent: Apply this label when the PR is risky and must be tested on staging first.
-Use this label if:
-- PR introduces rake tasks
-- PR performs data migration or bulk inserts/updates
-- PR mutates production data
-- PR lacks idempotency checks
-- PR affects background jobs or schedulers
-- REVIEW_EFFORT is LOW
+pr_agent: pr_agent: Apply this label to ANY PR for testing purposes.
 """
 
 [pr_reviewer]
