@@ -1,5 +1,6 @@
 [config]
-disable_auto_feedback = false     
+disable_auto_feedback = false
+enable_custom_labels = true
 
 [pull_request]
 review = true                   
@@ -21,6 +22,18 @@ performance = true
 [rules.javascript]
 eslint = true
 
+[custom_labels."needs-staging-test"]
+description = """
+pr_agent: Apply this label when the PR is risky and must be tested on staging first.
+Use this label if:
+- PR introduces rake tasks
+- PR performs data migration or bulk inserts/updates
+- PR mutates production data
+- PR lacks idempotency checks
+- PR affects background jobs or schedulers
+- REVIEW_EFFORT is LOW
+"""
+
 [pr_reviewer]
 extra_instructions = """
 Before reviewing the PR:
@@ -29,4 +42,17 @@ Before reviewing the PR:
 2. Treat these documents as the source of truth.
 3. When reviewing, reference violations of these best practices explicitly.
 4. Leave inline comments when best practices are violated.
+
+Estimate REVIEW_EFFORT: LOW, MEDIUM, or HIGH.
+
+Classify as HIGH if:
+- PR introduces rake tasks
+- PR mutates production data
+- PR creates or updates records in bulk
+- PR lacks idempotency checks
+- PR impacts background jobs or schedulers
+
+If REVIEW_EFFORT is HIGH:
+- Explicitly output: REVIEW_EFFORT: HIGH
+- Explicitly output: STAGING_TEST_REQUIRED
 """
