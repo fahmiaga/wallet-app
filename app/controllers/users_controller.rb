@@ -8,12 +8,13 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
-
-    if @user.update_attributes(user_params)
-      redirect_to @user, notice: "User updated"
-    else
-      render :show
+    begin
+      user = User.find(params[:id])
+      user.name = params[:name]
+      user.email = params[:email]
+      user.save
+    rescue => e
+      Rails.logger.error(e.message)
     end
   end
 
