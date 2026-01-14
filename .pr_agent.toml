@@ -12,6 +12,7 @@ on_push_update = false
 [pull_request_commands]
 enabled = true
 review = true
+generate_labels = true
 
 [rules.ruby]
 security = true
