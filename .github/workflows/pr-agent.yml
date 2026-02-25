@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: Run PR Agent
-        uses: qodo-ai/pr-agent@add-custom-label-feature
+        uses: fahmiaga/qodo@add-custom-label-feature
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
