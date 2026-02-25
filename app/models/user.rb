@@ -19,4 +19,8 @@ class User < ApplicationRecord
   def self.hash_password(raw, salt)
     OpenSSL::Digest::SHA256.hexdigest("#{salt}--#{raw}")
   end
+
+  def switch_wallet(wallet_id)
+    wallets.find_by(id: wallet_id)
+  end
 end
