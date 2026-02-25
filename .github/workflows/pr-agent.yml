@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: Run PR Agent
-        uses: qodo-ai/pr-agent@main
+        uses: fahmiaga/qodo@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
