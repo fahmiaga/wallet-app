@@ -1,6 +1,9 @@
 [config]
 disable_auto_feedback = false
 enable_custom_labels = true
+enable_auto_large_pr_label = true
+auto_label_large_pr_threshold = 1
+auto_label_large_pr_label_name = "large-pr"
 
 [pull_request]
 review = true                   
@@ -34,14 +37,4 @@ including one or more of the following:
 - Updates affecting multiple system layers (frontend, backend, API)
 - Introduction of new features rather than small fixes
 These PRs typically require higher review effort and careful review.
-"""
-
-[pr_reviewer]
-extra_instructions = """
-Before reviewing the PR:
-1. Read and follow the repository documentation:
-   - docs/best_practices.md
-2. Treat these documents as the source of truth.
-3. When reviewing, reference violations of these best practices explicitly.
-4. Leave inline comments when best practices are violated.
 """
