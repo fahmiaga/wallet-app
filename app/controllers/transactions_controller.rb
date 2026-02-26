@@ -4,6 +4,9 @@ class TransactionsController < ApplicationController
   end
   def create
     Transaction.create!(transaction_params)
+    render json: success_response("Transaction created successfully")
+  rescue => e
+    render json: error_response(e.message), status: :unprocessable_entity
   end
 
    private
