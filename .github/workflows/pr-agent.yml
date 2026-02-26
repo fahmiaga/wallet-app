@@ -17,6 +17,36 @@ jobs:
       contents: write
 
     steps:
+      - name: Check PR size and add label if large
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: pr } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number
+            });
+
+            const additions = pr.additions;
+            const deletions = pr.deletions;
+            const totalChanges = additions + deletions;
+
+            console.log(`Total changes: ${totalChanges}`);
+
+            const threshold = 1;
+
+            if (totalChanges > threshold) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.payload.pull_request.number,
+                labels: ["Large PR"]
+              });
+              console.log("Label 'Large PR' added.");
+            } else {
+              console.log("PR size is within acceptable limit.");
+            }
+
       - name: Run PR Agent
         uses: fahmiaga/qodo@add-custom-label-feature
         env:
@@ -30,4 +60,3 @@ jobs:
           github_action_config.auto_review: "true"
           github_action_config.auto_describe: "false"
           github_action_config.auto_improve: "true"
-
