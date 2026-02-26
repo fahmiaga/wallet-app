@@ -33,7 +33,7 @@ jobs:
 
             console.log(`Total changes: ${totalChanges}`);
 
-            const threshold = 1;
+            const threshold = 500;
             const labelName = "Large PR";
             const labelColor = "FF0000";
 
