@@ -1,7 +1,9 @@
 class TransactionsController < ApplicationController
   def new
+    @transaction = Transaction.new
   end
   def create
+    Transaction.create!(transaction_params)
   end
 
    private
