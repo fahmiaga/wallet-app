@@ -31,6 +31,9 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :transactions, only: [ :create, :new ] do
+    end
+
     get  "price",      to: "stocks#price"
     get  "prices",     to: "stocks#prices"
     get  "price_all",  to: "stocks#price_all"
