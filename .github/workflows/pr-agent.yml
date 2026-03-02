@@ -75,7 +75,7 @@ jobs:
       #       }
 
       - name: Run PR Agent
-        uses: fahmiaga/qodo@v-debug-1772439754
+        uses: fahmiaga/qodo@v-force-rebuild-1772441037
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
