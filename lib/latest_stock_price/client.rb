@@ -1,8 +1,9 @@
 require "net/http"
 require "json"
-require_relative "version"
 
 module LatestStockPrice
+  VERSION = "0.1.0"
+
   class Client
     BASE_URL = "https://latest-stock-price.p.rapidapi.com"
     def initialize(api_key: "e1241a3affmshe72cd11cc356253p173c9djsn035a550e4fa2", host: "latest-stock-price.p.rapidapi.com")
