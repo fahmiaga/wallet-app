@@ -1,0 +1,41 @@
+name: RND Self-Hosted Runner Test
+
+on:
+  push:
+    branches: [ fahmi-rnd-self-hosted ]
+
+jobs:
+  scan_ruby:
+    runs-on: [self-hosted, linux, rnd-local]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Print runner info
+        run: |
+          echo "Runner: $(hostname) | $(nproc) threads | $(free -h | awk '/Mem:/ {print $2}') RAM"
+          echo "Ruby: $(ruby -v 2>/dev/null || echo 'via setup-ruby')"
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      - name: Brakeman (static security scan)
+        run: bundle exec brakeman --no-pager
+
+  lint:
+    runs-on: [self-hosted, linux, rnd-local]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      - name: RuboCop (style lint)
+        run: bundle exec rubocop -f github
