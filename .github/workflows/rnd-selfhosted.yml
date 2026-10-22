@@ -4,10 +4,6 @@ on:
   push:
     branches: [ fahmi-rnd-self-hosted ]
 
-# Self-hosted runner: tool cache must be writable without root
-env:
-  RUNNER_TOOL_CACHE: /home/fahmi/actions-runner/toolcache
-
 jobs:
   scan_ruby:
     runs-on: [self-hosted, linux, rnd-local]
@@ -18,13 +14,15 @@ jobs:
       - name: Print runner info
         run: |
           echo "Runner: $(hostname) | $(nproc) threads | $(free -h | awk '/Mem:/ {print $2}') RAM"
-          echo "Ruby: $(ruby -v 2>/dev/null || echo 'via setup-ruby')"
+          echo "Ruby: $(ruby -v)"
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: .ruby-version
-          bundler-cache: true
+      - name: Add rbenv Ruby to PATH
+        run: |
+          echo "$HOME/.rbenv/bin" >> "$GITHUB_PATH"
+          echo "$HOME/.rbenv/shims" >> "$GITHUB_PATH"
+
+      - name: Install gems (bundle install)
+        run: bundle install
 
       - name: Brakeman (static security scan)
         run: bundle exec brakeman --no-pager
@@ -35,11 +33,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: .ruby-version
-          bundler-cache: true
+      - name: Add rbenv Ruby to PATH
+        run: |
+          echo "$HOME/.rbenv/bin" >> "$GITHUB_PATH"
+          echo "$HOME/.rbenv/shims" >> "$GITHUB_PATH"
+
+      - name: Install gems (bundle install)
+        run: bundle install
 
       - name: RuboCop (style lint)
         run: bundle exec rubocop -f github
