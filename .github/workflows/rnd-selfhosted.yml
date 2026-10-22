@@ -4,6 +4,10 @@ on:
   push:
     branches: [ fahmi-rnd-self-hosted ]
 
+# Self-hosted runner: tool cache must be writable without root
+env:
+  RUNNER_TOOL_CACHE: /home/fahmi/actions-runner/toolcache
+
 jobs:
   scan_ruby:
     runs-on: [self-hosted, linux, rnd-local]
