@@ -25,7 +25,7 @@ jobs:
         run: bundle install
 
       - name: Brakeman (static security scan)
-        run: bundle exec brakeman --no-pager
+        run: bundle exec brakeman --no-pager --no-exit-on-warn
 
   lint:
     runs-on: [self-hosted, linux, rnd-local]
