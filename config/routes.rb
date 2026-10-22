@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  get "users/index"
-  get "users/show"
-  patch "users/update/:id"
-  post "users/create"
-  get "users/new"
+  get "users/index", to: "users#index", as: :users
+  get "users/show/:id", to: "users#show", as: :user
+  patch "users/update/:id", to: "users#update"
+  post "users/create", to: "users#create"
+  get "users/new", to: "users#new"
   delete "users/:id", to: "users#destroy"
   get "users/:id/wallet", to: "users#wallet"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

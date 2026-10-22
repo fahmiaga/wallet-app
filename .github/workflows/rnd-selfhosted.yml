@@ -43,3 +43,25 @@ jobs:
 
       - name: RuboCop (style lint)
         run: bundle exec rubocop -f github
+
+  rails_test:
+    runs-on: [self-hosted, linux, rnd-local]
+    env:
+      RAILS_ENV: test
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Add rbenv Ruby to PATH
+        run: |
+          echo "$HOME/.rbenv/bin" >> "$GITHUB_PATH"
+          echo "$HOME/.rbenv/shims" >> "$GITHUB_PATH"
+
+      - name: Install gems (bundle install)
+        run: bundle install
+
+      - name: Set up test database (schema only, no seeds)
+        run: bundle exec rails db:create db:migrate
+
+      - name: Run minitest suite
+        run: bundle exec rails test

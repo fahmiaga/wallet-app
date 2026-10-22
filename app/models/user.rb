@@ -7,6 +7,8 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true
 
+  validate :password_required
+
   def password=(raw)
     self.password_salt = SecureRandom.hex(16)
     self.password_hash = self.class.hash_password(raw, password_salt)
@@ -22,5 +24,11 @@ class User < ApplicationRecord
 
   def switch_wallet(wallet_id)
     wallets.find_by(id: wallet_id)
+  end
+
+  private
+
+  def password_required
+    errors.add(:password, "can't be blank") if password_hash.nil? || password_hash.empty?
   end
 end
