@@ -63,5 +63,5 @@ jobs:
       - name: Set up test database (schema only, no seeds)
         run: bundle exec rails db:create db:migrate
 
-      - name: Run minitest suite
-        run: bundle exec rails test
+      - name: Benchmark minitest suite (warm-up + 10 runs)
+        run: bash script/benchmark-tests

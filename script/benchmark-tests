@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+iterations=10
+durations=()
+
+echo "Warm-up run (excluded from benchmark)"
+bundle exec rails test
+
+for run in $(seq 1 "$iterations"); do
+  started_at=$(date +%s%N)
+  bundle exec rails test
+  finished_at=$(date +%s%N)
+  duration_ms=$(((finished_at - started_at) / 1000000))
+  durations+=("$duration_ms")
+  echo "Benchmark run $run/$iterations: ${duration_ms} ms"
+done
+
+mapfile -t sorted_durations < <(printf '%s\n' "${durations[@]}" | sort -n)
+middle=$((iterations / 2))
+median_ms=$(((sorted_durations[middle - 1] + sorted_durations[middle]) / 2))
+
+echo "Benchmark summary: runs=$iterations median=${median_ms} ms min=${sorted_durations[0]} ms max=${sorted_durations[iterations - 1]} ms"

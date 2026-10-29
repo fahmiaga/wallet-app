@@ -38,8 +38,8 @@ jobs:
       - name: Set up test database
         run: bundle exec rails db:create db:migrate
 
-      - name: Run minitest suite
-        run: bundle exec rails test
+      - name: Benchmark minitest suite (warm-up + 10 runs)
+        run: bash script/benchmark-tests
 
   scan_ruby:
     runs-on: ubuntu-latest
