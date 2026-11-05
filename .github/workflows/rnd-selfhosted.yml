@@ -1,68 +1,15 @@
-name: RND Self-Hosted Runner Test
+name: Runner Connection Test
 
 on:
-  push:
-    branches: [fahmi-rnd-self-hosted]
+  workflow_dispatch:
 
 jobs:
-  scan_ruby:
-    runs-on: [self-hosted, Linux, X64]
+  test:
+    runs-on: self-hosted
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Print runner info
+      - name: Test runner
         run: |
-          echo "Runner: $(hostname) | $(nproc) threads | $(free -h | awk '/Mem:/ {print $2}') RAM"
-          echo "Ruby: $(ruby -v)"
-
-      - name: Add rbenv Ruby to PATH
-        run: |
-          echo "$HOME/.rbenv/bin" >> "$GITHUB_PATH"
-          echo "$HOME/.rbenv/shims" >> "$GITHUB_PATH"
-
-      - name: Install gems (bundle install)
-        run: bundle install
-
-      - name: Brakeman (static security scan)
-        run: bundle exec brakeman --no-pager --no-exit-on-warn
-        continue-on-error: true
-
-  lint:
-    runs-on: [self-hosted, Linux, X64]
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Add rbenv Ruby to PATH
-        run: |
-          echo "$HOME/.rbenv/bin" >> "$GITHUB_PATH"
-          echo "$HOME/.rbenv/shims" >> "$GITHUB_PATH"
-
-      - name: Install gems (bundle install)
-        run: bundle install
-
-      - name: RuboCop (style lint)
-        run: bundle exec rubocop -f github
-
-  rails_test:
-    runs-on: [self-hosted, Linux, X64]
-    env:
-      RAILS_ENV: test
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Add rbenv Ruby to PATH
-        run: |
-          echo "$HOME/.rbenv/bin" >> "$GITHUB_PATH"
-          echo "$HOME/.rbenv/shims" >> "$GITHUB_PATH"
-
-      - name: Install gems (bundle install)
-        run: bundle install
-
-      - name: Set up test database (schema only, no seeds)
-        run: bundle exec rails db:create db:migrate
-
-      - name: Benchmark minitest suite (warm-up + 10 runs)
-        run: bash script/benchmark-tests
+          echo "Hello from Cloud Run!"
+          hostname
+          nproc
+          free -h
