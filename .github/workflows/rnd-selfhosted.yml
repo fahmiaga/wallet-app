@@ -2,11 +2,11 @@ name: RND Self-Hosted Runner Test
 
 on:
   push:
-    branches: [ fahmi-rnd-self-hosted ]
+    branches: [fahmi-rnd-self-hosted]
 
 jobs:
   scan_ruby:
-    runs-on: [self-hosted, linux, rnd-local]
+    runs-on: [self-hosted, linux, x64]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
