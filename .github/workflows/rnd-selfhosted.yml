@@ -6,7 +6,7 @@ on:
 
 jobs:
   scan_ruby:
-    runs-on: [self-hosted, linux, x64]
+    runs-on: self-hosted
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -28,7 +28,7 @@ jobs:
         run: bundle exec brakeman --no-pager --no-exit-on-warn
 
   lint:
-    runs-on: [self-hosted, linux, rnd-local]
+    runs-on: self-hosted
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -45,7 +45,7 @@ jobs:
         run: bundle exec rubocop -f github
 
   rails_test:
-    runs-on: [self-hosted, linux, rnd-local]
+    runs-on: self-hosted
     env:
       RAILS_ENV: test
     steps:
