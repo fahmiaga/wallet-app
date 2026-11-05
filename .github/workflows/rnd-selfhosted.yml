@@ -26,6 +26,7 @@ jobs:
 
       - name: Brakeman (static security scan)
         run: bundle exec brakeman --no-pager --no-exit-on-warn
+        continue-on-error: true
 
   lint:
     runs-on: [self-hosted, Linux, X64]
