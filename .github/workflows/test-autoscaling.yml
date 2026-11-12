@@ -1,4 +1,4 @@
-name: Test CREMA Autoscaling
+name: Test CREMA Parallel Autoscaling
 
 on:
   push:
@@ -7,19 +7,25 @@ on:
   workflow_dispatch:
 
 jobs:
-  test_runner:
+  test_parallel:
+    name: Runner ${{ matrix.runner }}
     runs-on: [self-hosted, linux, x64]
+
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [1, 2]
 
     steps:
       - name: Show Runner Information
         run: |
-          echo "Runner: $RUNNER_NAME"
+          echo "Matrix Runner: ${{ matrix.runner }}"
+          echo "GitHub Runner: $RUNNER_NAME"
           echo "Hostname: $(hostname)"
-          echo "CPU: $(nproc)"
-          free -h
+          echo "Started at: $(date)"
 
       - name: Simulate Long Running Job
         run: |
-          echo "Starting 5-minute test..."
+          echo "Starting parallel job..."
           sleep 300
-          echo "Test completed!"
+          echo "Finished at: $(date)"
