@@ -27,5 +27,5 @@ jobs:
       - name: Simulate Long Running Job
         run: |
           echo "Starting parallel job..."
-          sleep 300
+          sleep 120
           echo "Finished at: $(date)"
