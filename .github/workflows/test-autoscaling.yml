@@ -1,6 +1,9 @@
 name: Test CREMA Autoscaling
 
 on:
+  push:
+    branches:
+      - fahmi-rnd-self-hosted
   workflow_dispatch:
 
 jobs:
