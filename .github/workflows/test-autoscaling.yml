@@ -1,0 +1,22 @@
+name: Test CREMA Autoscaling
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test_runner:
+    runs-on: [self-hosted, linux, x64]
+
+    steps:
+      - name: Show Runner Information
+        run: |
+          echo "Runner: $RUNNER_NAME"
+          echo "Hostname: $(hostname)"
+          echo "CPU: $(nproc)"
+          free -h
+
+      - name: Simulate Long Running Job
+        run: |
+          echo "Starting 5-minute test..."
+          sleep 300
+          echo "Test completed!"
